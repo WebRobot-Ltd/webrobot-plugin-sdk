@@ -2,7 +2,7 @@
 
 Public API for building ETL plugins for the [WebRobot](https://webrobot.eu) platform.
 
-- **Zero ETL internal dependencies** — no SpookyStuff, no Spark, no internal engine classes
+- **Zero ETL internal dependencies** —  no Spark, no internal engine classes
 - **Zero runtime dependencies** — the ETL engine provides everything at runtime
 - Plugins are discovered automatically via Java **ServiceLoader**
 
