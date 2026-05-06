@@ -54,13 +54,18 @@ publishing {
         }
     }
     repositories {
-        maven {
-            name = "GitHubPackages"
-            url  = uri("https://maven.pkg.github.com/WebRobot-Ltd/webrobot-plugin-sdk")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR") ?: providers.gradleProperty("gpr.user").orNull ?: "webroboteu"
-                password = System.getenv("GITHUB_TOKEN") ?: providers.gradleProperty("gpr.key").orNull
-                    ?: throw GradleException("GITHUB_TOKEN required for publishing")
+        // GitHub Packages registration kept for internal CI; only registered when a token
+        // is present so that JitPack and partner-side mavenLocal builds (no token) work.
+        // Public consumption of this SDK happens via JitPack.
+        val gprToken = System.getenv("GITHUB_TOKEN") ?: providers.gradleProperty("gpr.key").orNull
+        if (gprToken != null) {
+            maven {
+                name = "GitHubPackages"
+                url  = uri("https://maven.pkg.github.com/WebRobot-Ltd/webrobot-plugin-sdk")
+                credentials {
+                    username = System.getenv("GITHUB_ACTOR") ?: providers.gradleProperty("gpr.user").orNull ?: "webroboteu"
+                    password = gprToken
+                }
             }
         }
     }
