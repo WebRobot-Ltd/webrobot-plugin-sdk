@@ -5,7 +5,7 @@ plugins {
 }
 
 group   = "eu.webrobot"
-version = "0.2.0"
+version = "0.2.1"
 
 val scalaVersion     = "2.13.12"
 val scalaBinaryV     = "2.13"

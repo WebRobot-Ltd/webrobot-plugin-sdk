@@ -80,6 +80,19 @@ trait WebroStageContext extends Serializable {
   /** Returns current build environment: "development", "staging", or "production". */
   def buildType: String
 
+  // ── LLM ─────────────────────────────────────────────────────────────────────
+
+  /**
+   * Platform LLM inference. Available since v0.2.1 — symmetric with the Jersey plugin SDK.
+   * Default impl throws so platform builds running an older engine satisfy the trait;
+   * the v0.2.1-aware engine overrides with the real implementation.
+   *
+   * @since 0.2.1
+   */
+  def llm: LlmService =
+    throw new UnsupportedOperationException(
+      "LlmService not provided by this engine build. Upgrade WebRobot ETL to a v0.2.1-compatible release.")
+
   // ── Logging ─────────────────────────────────────────────────────────────────
 
   /** Logs at INFO level — preferred over println in distributed stages. */
